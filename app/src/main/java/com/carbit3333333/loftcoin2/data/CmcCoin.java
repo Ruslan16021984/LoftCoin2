@@ -1,4 +1,4 @@
-package com.carbit3333333.loftcoin2.ui.data;
+package com.carbit3333333.loftcoin2.data;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
@@ -7,16 +7,11 @@ import com.squareup.moshi.Json;
 import java.util.Iterator;
 import java.util.Map;
 
-
 @AutoValue
-public abstract class Coin {
-    public abstract int id();
-
-    public abstract String name();
-
-    public abstract String symbol();
+public abstract class CmcCoin implements Coin{
 
     @Memoized
+    @Override
     public double price() {
         final Iterator<? extends Quote> iterator = quote().values().iterator();
         if (iterator.hasNext()) return iterator.next().price();
@@ -24,6 +19,7 @@ public abstract class Coin {
     }
 
     @Memoized
+    @Override
     public double change24h() {
         final Iterator<? extends Quote> iterator = quote().values().iterator();
         if (iterator.hasNext()) return iterator.next().change24h();
@@ -32,9 +28,10 @@ public abstract class Coin {
 
     @Json(name = "cmc_rank")
     @AutoValue.CopyAnnotations
+    @Override
     public abstract int rank();
 
-    abstract Map<String, AutoValue_Coin_Quote> quote();
+    abstract Map<String, AutoValue_CmcCoin_Quote> quote();
 
     @AutoValue
     abstract static class Quote {
@@ -46,5 +43,4 @@ public abstract class Coin {
         public abstract double change24h();
 
     }
-
 }

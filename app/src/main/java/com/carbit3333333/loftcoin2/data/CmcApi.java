@@ -1,4 +1,4 @@
-package com.carbit3333333.loftcoin2.ui.data;
+package com.carbit3333333.loftcoin2.data;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
